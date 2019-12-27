@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import data from './data';
 
@@ -11,9 +11,16 @@ import ShoppingCart from './components/ShoppingCart';
 import { ProductContext } from './context/ProductContext';
 import { CartContext } from './context/CartContext';
 
+// Hooks
+import { useLocalStorage } from './hooks/useLocalStorage';
+
 function App() {
-	const [products] = useState(data);
-	const [cart, setCart] = useState([]);
+
+	const [products] = useLocalStorage('products', data);
+	const [cart, setCart] = useLocalStorage('cart', []);
+
+	//const [products] = useState(data);
+	//const [cart, setCart] = useState([]);
 
 	const addItem = item => {
 		// add the given item to the cart
